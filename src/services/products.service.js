@@ -6,10 +6,12 @@ const findAllProducts = async () => {
   return { type: null, message: result };
 };
 
-// const findAllProductsById = async (idProduct) => {
-//   const result = await productsModel.findAllProductsById(idProduct);
-//   if (!idProduct) return { type: 'PRODUCT_NOT_FOUND', message: result };
-// };
+const findAllProductsById = async (id) => {
+  const results = await productsModel.findProductsById(id);
+  if (!results) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  console.log(results);
+  return { type: null, message: results };
+};
 
 // const createProduct = async (name) => {
 //   const error = validateNewProduct(name);
@@ -23,6 +25,6 @@ const findAllProducts = async () => {
 
 module.exports = {
   findAllProducts,
-  // findAllProductsById,
+  findAllProductsById,
   // createProduct,
 };

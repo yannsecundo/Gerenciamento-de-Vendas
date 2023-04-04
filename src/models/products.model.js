@@ -9,11 +9,13 @@ const findAllProducts = async () => {
   return camelize(result);
 };
 
-// const findProductsById = async (idProduct) => {
-//   const queryFindId = 'SELECT * FROM StoreManager.products WHERE id =?';
-//   const [result] = await connection.execute(queryFindId, [idProduct]);
-//   return camelize(result);
-// };
+const findProductsById = async (id) => {
+  const [[result]] = await connection.execute(
+    'SELECT * FROM StoreManager.products WHERE id = ?;',
+    [id],
+  );
+  return camelize(result);
+};
 
 // const createProduct = async (products) => {
 //   const collumns = Object.keys(snakeize(products)).join(', ');
@@ -27,6 +29,6 @@ const findAllProducts = async () => {
 
 module.exports = {
   findAllProducts,
-  // findProductsById,
+  findProductsById,
   // createProduct,
 };

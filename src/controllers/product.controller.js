@@ -8,14 +8,14 @@ const listProducts = async (_req, res) => {
   return res.status(200).json(message);
 };
 
-// const listById = async (req, res) => {
-//   const { id } = req.params;
-//   const { type, message } = await productsService.findAllProductsById(id);
+const listById = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await productsService.findAllProductsById(id);
 
-//   if (type) return res.status(404).json(message);
+  if (type) return res.status(404).json({ message });
 
-//   return res.status(200).json(message);
-// };
+  return res.status(200).json(message);
+};
 
 // const addProduct = async (req, res) => {
 //   const { name } = req.body;
@@ -28,6 +28,6 @@ const listProducts = async (_req, res) => {
 
 module.exports = {
   listProducts,
-  // listById,
+  listById,
   // addProduct,
 };
