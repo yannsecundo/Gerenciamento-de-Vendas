@@ -1,6 +1,6 @@
 const { productsModel } = require('../models/index');
 const { validateNewProduct } = require('../validations.js/validation.create');
-const { validationName } = require('../middlewares/product.validate');
+const { validateN } = require('../middlewares/product.validate');
 
 const findAllProducts = async () => { 
   const result = await productsModel.findAllProducts();
@@ -38,7 +38,7 @@ const updateProduct = async (id, updateProducts) => {
   const { name } = updateProducts;
   const results = await productsModel.findProductsById(id);
   if (!results) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
-  const validateResultRequired = validationName.validateN(name);
+  const validateResultRequired = validateN(name);
 
   if (validateResultRequired.type) return validateResultRequired;
 
