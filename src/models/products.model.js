@@ -1,5 +1,5 @@
 const camelize = require('camelize');
-const snakeize = require('snakeize');
+// const snakeize = require('snakeize');
 const connection = require('./connection');
 
 const findAllProducts = async () => {
@@ -10,25 +10,44 @@ const findAllProducts = async () => {
 };
 
 const findProductsById = async (id) => {
-  const [[result]] = await connection.execute(
+  const [result] = await connection.execute(
     'SELECT * FROM StoreManager.products WHERE id = ?;',
     [id],
   );
   return camelize(result);
 };
 
-const createProduct = async (products) => {
-  const collumns = Object.keys(snakeize(products)).join(', ');
-  const placeHolders = Object.keys(products).map((_key) => '?').join(', ');
-  const queryCreate = `INSERT INTO StoreManager.products (${collumns}) VALUES (${placeHolders})`;
+// const createProduct = async (products) => {
+//   const collumns = Object.keys(snakeize(products)).join(', ');
+//   const placeHolders = Object.keys(products).map((_key) => '?').join(', ');
+//   const queryCreate = `INSERT INTO StoreManager.products (${collumns}) VALUES (${placeHolders})`;
 
-  const [{ insertId }] = await connection.execute(queryCreate);
+//   const [{ insertId }] = await connection.execute(queryCreate);
 
-  return insertId;
-};
+//   return insertId;
+// };
+
+const createProduct = (produto) => connection.execute(
+  'INSERT INTO StoreManager.products (name) VALUES (?);',
+  [produto.name],
+);
+
+const updateProduct = (id, updateP) => connection.execute(
+  `UPDATE StoreManager.products
+   SET name = ?
+   WHERE id = ?;`,
+  [updateP, id],
+);
+
+const deleteProducts = (id) => connection.execute(
+  'DELETE FROM StoreManager.products WHERE id = ?;',
+  [id],
+);
 
 module.exports = {
   findAllProducts,
   findProductsById,
   createProduct,
+  updateProduct,
+  deleteProducts,
 };
