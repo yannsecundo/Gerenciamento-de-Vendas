@@ -4,7 +4,7 @@ const connection = require('./connection');
 
 const findAllSales = async () => {
   const [result] = await connection.execute(
-    'SELECT * FROM StoreManager.sales',
+    'SELECT * FROM StoreManager.sales;',
   );
   return camelize(result);
 };
