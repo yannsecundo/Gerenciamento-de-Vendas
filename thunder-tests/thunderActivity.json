@@ -32,11 +32,11 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3301/products/1",
-    "url": "localhost:3301/products",
+    "url": "localhost:3301/sales",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-04-04T22:47:50.239Z",
-    "modified": "2023-04-04T22:56:54.936Z",
+    "modified": "2023-04-05T00:23:53.984Z",
     "headers": [],
     "params": [],
     "tests": []

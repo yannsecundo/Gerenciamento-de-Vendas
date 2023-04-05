@@ -1,5 +1,5 @@
 const camelize = require('camelize');
-// const snakeize = require('snakeize');
+const snakeize = require('snakeize');
 const connection = require('./connection');
 
 const findAllProducts = async () => {
@@ -17,18 +17,18 @@ const findProductsById = async (id) => {
   return camelize(result);
 };
 
-// const createProduct = async (products) => {
-//   const collumns = Object.keys(snakeize(products)).join(', ');
-//   const placeHolders = Object.keys(products).map((_key) => '?').join(', ');
-//   const queryCreate = `INSERT INTO StoreManager.products (${collumns}) VALUES (${placeHolders})`;
+const createProduct = async (products) => {
+  const collumns = Object.keys(snakeize(products)).join(', ');
+  const placeHolders = Object.keys(products).map((_key) => '?').join(', ');
+  const queryCreate = `INSERT INTO StoreManager.products (${collumns}) VALUES (${placeHolders})`;
 
-//   const [{ insertId }] = await connection.execute(queryCreate);
+  const [{ insertId }] = await connection.execute(queryCreate);
 
-//   return insertId;
-// };
+  return insertId;
+};
 
 module.exports = {
   findAllProducts,
   findProductsById,
-  // createProduct,
+  createProduct,
 };
