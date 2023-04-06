@@ -6,7 +6,7 @@ const { expect } = chai;
 chai.use(sinonChai);
 
 const { productsService } = require('../../../src/services/index');
-const { productsController } = require('../../../src/controllers/product.controller');
+const { listProducts, listById } = require('../../../src/controllers/product.controller');
 const {
   productListMock,
   newProductMock
@@ -26,7 +26,7 @@ describe('Teste de unidade do productController', function () {
         .resolves({ type: null, message: productListMock });
 
       // act
-      await productsController.listProducts(req, res);
+      await listProducts(req, res);
 
       // assert
       expect(res.status).to.have.been.calledWith(200);
@@ -49,7 +49,7 @@ describe('Buscando uma produto por ID', function () {
         .resolves({ type: null, message: newProductMock });
 
       // Act
-      await productsController.listById(req, res);
+      await listById(req, res);
 
       // Assert
       expect(res.status).to.have.been.calledWith(200);
