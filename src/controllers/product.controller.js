@@ -32,8 +32,9 @@ const updateProduct = async (req, res) => {
   const { name } = req.body;
   const { type, message } = await productsService.updateProduct(id, { name });
 
-  if (type) return res.status(404).json({ message });
-
+  if (type === 'BAD_REQUEST') return res.status(400).json({ message });
+  if (type === 'UNPROCESSABLE_ENTITY') return res.status(422).json({ message });
+  if (type) return res.status(404).json({ message });  
   return res.status(200).json(message);
  };
 
